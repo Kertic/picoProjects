@@ -23,10 +23,7 @@ return obj
 end
 
 function _init()
-
-
 local enemyobj2 = make_object("enemy2",32,0,0)
-
 local enemyobj = make_object("enemy",32,0,32)
 local playerobj = make_object("player",1,0,8)
 playerobj.gravity = 1
@@ -48,7 +45,7 @@ tp = getplayer()
 		if(btnp(1)) then
 		tp.x += 1
 	end
-	if(will_player_collide() == false) then
+	if(will_player_collide_vertically() == false) then
 		moveplayer(0, getplayer().gravity)
 
 	end
@@ -120,7 +117,7 @@ updateplayer(tempplayer)
 end
 
 
-function will_player_collide()
+function will_player_collide_vertically()
 local tp,pindex = getplayer()
 local coldet = false
 local gm = abs(tp.gravity) / tp.gravity --either a -1 or 1
