@@ -20,7 +20,7 @@ local	p2 = {}
 	p1.x = 0
 	p1.y = 63
 
-	p2.spr = 1
+	p2.spr = 2
 	p2.x = 119
 	p2.y = 63
 	add(players,p1)
@@ -45,8 +45,32 @@ function _update()
 
 		end
 
+		if(btnp(4)) then
+			p1.spr -= 1
+			if(p1.spr < 1) p1.spr = 3
+			if(p1.spr == p2.spr) p1.spr -= 1
+			if(p1.spr < 1) p1.spr = 3
+		end
+
+		if(btnp(5)) then
+			p1.spr += 1
+			if(p1.spr > 3) p1.spr = 1
+			if(p1.spr == p2.spr) p1.spr += 1
+			if(p1.spr > 3) p1.spr = 1
+		end
+
 		if(btnp(0)) then
-			
+			p2.spr -= 1
+			if(p2.spr < 1) p2.spr = 3
+			if(p2.spr == p1.spr) p2.spr -= 1
+			if(p2.spr < 1) p2.spr = 3
+		end
+
+		if(btnp(1)) then
+			p2.spr += 1
+			if(p2.spr > 3) p2.spr = 1
+			if(p2.spr == p1.spr) p2.spr += 1
+			if(p2.spr > 3) p2.spr = 1
 		end
 	end
 
