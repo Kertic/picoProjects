@@ -9,6 +9,7 @@ mode = 1
 --0 = menu, 1 is play
 --2 is p1 victory
 --3 is p2 victory
+msg = false
 
 players = {}
 
@@ -33,15 +34,36 @@ end
 function _update()
 	local p1 = getp1()
 	local p2 = getp2()
+	--main menu mode
 	if(mode == 0) then
 	end
 
+	--p1 victory
+	if(mode == 2) then
+		if(btnp(0) or btnp(1) or btnp(4) or btnp(5)) reset() --replay
+	end
+	--p2 victory
+	if(mode == 3) then
+		if(btnp(0) or btnp(1) or btnp(4) or btnp(5)) reset() --replay
+	end
+
+	--in game mode
 	if(mode == 1) then
 		--game logic
 		p1.x += speed
 		p2.x -= speed
 		if(p2.x <= p1.x + 8)then
 			--collision, so gameover
+			if(p1.spr == 1) then
+				if(p2.spr == 2) mode = 2
+				if(p2.spr == 3) mode = 3
+			elseif(p1.spr == 2) then
+				if(p2.spr == 1) mode = 3
+				if(p2.spr == 3) mode = 2
+			elseif(p1.spr == 3) then
+				if(p2.spr == 1) mode = 2
+				if(p2.spr == 2) mode = 3
+			end
 
 		end
 
@@ -74,15 +96,28 @@ function _update()
 		end
 	end
 
+
+
 end
 
 
 function _draw()
+
+	cls()
 	if(mode == 0) then
 	end
 	if(mode == 1) then
-		cls()
 		drawplayers()
+	end
+	if(mode == 2) then
+		print("player 1 winner",0,0)
+		print("press z, x, left or right",0,8)
+		print("to try again",0,16)
+	end
+	if(mode == 3) then
+		print("player 1 winner",0,0)
+		print("press z, x, left or right",0,8)
+		print("to try again",0,16)
 	end
 end
 -->8
@@ -94,7 +129,22 @@ end
 function drawplayers()
 	for i=1,count(players) do
 		spr(players[i].spr, players[i].x, players[i].y)
+
 	end
+end
+
+function reset()
+	local p1 = getp1()
+	local p2 = getp2()
+	p1.spr = 1
+	p1.x = 0
+	p1.y = 63
+
+	p2.spr = 2
+	p2.x = 119
+	p2.y = 63
+	speed = 1
+	mode = 1
 end
 
 -->8
