@@ -119,6 +119,9 @@ print("p1: z and x.",0,79,9)
 print("p2: left and right arrow",0,85,10)
 print("press any of these keys to start",0,93,11)
 
+print("by: brennan rodriguez",0,109,1)
+print("brennanrodriguez.com",0,117,1)
+
 	end
 	if(mode == 1) then
 		drawplayers()
@@ -322,4 +325,3 @@ __sfx__
 __music__
 01 0102437b
 02 01020344
-
