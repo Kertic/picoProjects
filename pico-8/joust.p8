@@ -30,7 +30,7 @@ local	p2 = {}
 	add(players,p2)
 
 	speed = 0.5
-	menuitem(1,"reset game",reset)
+	menuitem(1,"reset game",function() mode = 0 p1.score = 0 p2.score = 0 end)
 end
 
 
@@ -59,8 +59,10 @@ elseif(mode == 1) then
 			--collision, so gameover
 			if(findWinner() == true) then
 				mode = 2
+				p1.score += 1
 			else
 				mode = 3
+				p2.score += 1
 			end
 
 		end
@@ -117,7 +119,7 @@ print("press any of these keys to start",0,93,12)
 		drawplayers()
 		map(0,0,52,32,3,3)
 		print("p1 score:" .. p1.score, 0,0,12)
-		print("p1 score:" .. p1.score, 0,8,11)
+		print("p2 score:" .. p2.score, 0,8,11)
 	end
 	if(mode == 2) then
 		print("player 1 winner",0,0,12)
@@ -164,12 +166,12 @@ function reset()
 	p1.spr = 1
 	p1.x = 0
 	p1.y = 63
-	p1.score = 0
+
 
 	p2.spr = 2
 	p2.x = 119
 	p2.y = 63
-	p2.score = 0
+
 	speed = 0.5
 	mode = 1
 end
