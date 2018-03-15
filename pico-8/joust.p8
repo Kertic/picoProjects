@@ -10,7 +10,7 @@ mode = 0
 --2 is p1 victory
 --3 is p2 victory
 msg = false
-debug = true
+debug = false
 framecount = 0
 players = {}
 
